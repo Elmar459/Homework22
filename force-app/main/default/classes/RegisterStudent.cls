@@ -1,0 +1,18 @@
+public with sharing class RegisterStudent {
+    public String registerStudent(String name, String phone, String email) {
+
+    apxio__Student__c newStudent = new apxio__Student__c(Name=name, apxio__Email__c=email, apxio__Phone__c=phone);
+
+    insert newStudent;
+    
+    apxio__Student__c insertedStudent = [
+        SELECT apxio__Registration_Number__c 
+        FROM apxio__Student__c 
+        WHERE Id = :newStudent.Id
+    ];
+
+    return insertedStudent.apxio__Registration_Number__c;
+
+}
+//#127 - Register Student
+}
